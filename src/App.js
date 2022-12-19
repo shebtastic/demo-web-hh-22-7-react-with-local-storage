@@ -1,11 +1,20 @@
-import { useState } from "react";
+// import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
 import List from "./components/List";
 import Form from "./components/Form";
 import "./styles.css";
 
 export default function App() {
-  const [todos, setTodos] = useState([]);
+  // const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useLocalStorageState("todos", {
+    defaultValue: [],
+  });
+  // const [favorites, setFavorites] = useLocalStorageState("favorites", {
+  //   defaultValue: {
+  //     a: 5,
+  //   },
+  // });
 
   function handleAddTodo(title) {
     setTodos([
@@ -29,6 +38,7 @@ export default function App() {
   return (
     <main>
       <h1>Todo-App</h1>
+      {/* {favorites.a} */}
       <Form onAddTodo={handleAddTodo} />
       <List todos={todos} onToggleCheckTodo={handleToggleCheckTodo} />
     </main>
